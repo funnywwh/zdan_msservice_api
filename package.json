@@ -1,0 +1,9 @@
+{
+  "name": "zdan_msservice_types",
+  "version": "1.0.0",
+  "description": "zdan 微服务类型定义",
+  "main": "index.d.ts",
+  "repository": "http://gitlab.rightchaintech.com/zdan_dmapp/zdan_msservice_types.git",
+  "author": "winger <wuwenhui@rightchaintech.com>",
+  "license": "MIT"
+}
