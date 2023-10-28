@@ -3,7 +3,7 @@
  * 微服务管理组关闭时的异步通知；此接口为消息通知类型，底层所有数据后通知上层。
  * @param groupsid 表示服务组id号
  */
-declare type OnGroupServiceClose = (groupsid: string) => void;
+export declare type OnGroupServiceClose = (groupsid: string) => void;
 
 /**
  * 微服务组内接收成员发来的数据通知
@@ -12,7 +12,7 @@ declare type OnGroupServiceClose = (groupsid: string) => void;
  * @param strMemberId 表示服务组内成员id
  * @param strdata 表示发送的数据
  */
-declare type OnGroupServiceReceive = (groupsid: string, strMemberId: number, strdata: string) => void;
+export declare type OnGroupServiceReceive = (groupsid: string, strMemberId: number, strdata: string) => void;
 
 /**
  * 微服务组内新成员加入通知
@@ -21,12 +21,9 @@ declare type OnGroupServiceReceive = (groupsid: string, strMemberId: number, str
  * @param memberId 表示服务组内成员id
  * @param userinfo 表示加入成员的用户信息等
  */
-declare type OnGroupServiceMemberJoin = (groupsid: string, memberId: number, userinfo: string) => void;
+export declare type OnGroupServiceMemberJoin = (groupsid: string, memberId: number, userinfo: string) => void;
 
 
-declare interface sendMsgToMemberResult {
-
-}
 /**
  * 微服务组成员状态变更通知
  * 组发生状态时的变化通知；此接口为消息通知类型，底层所有数据后通知上层。
@@ -34,16 +31,16 @@ declare interface sendMsgToMemberResult {
  * @param memberId 表示服务组内成员id
  * @param status 为组状态变化值，1为在线，0为离线;
  */
-declare type OnGroupMemberStatusChange = (groupsid: string, memberId: number, status: number) => void;
+export declare type OnGroupMemberStatusChange = (groupsid: string, memberId: number, status: number) => void;
 /**
  * 微服务组内成员离开通知
  * 组内成员离开时收到的消息；此接口为消息通知类型，底层所有数据后通知上层。
  * @param groupsid 表示服务组id号
  * @param memberId 表示服务组内成员id
  */
-declare type OnGroupServiceMemberLeave = (groupsid: string, memberId: number) => void;
+export declare type OnGroupServiceMemberLeave = (groupsid: string, memberId: number) => void;
 
-declare interface zmcserver {
+export declare interface zmcserver {
     /**
      * 
      * @param dmappId 
@@ -110,19 +107,19 @@ declare interface zmcserver {
      * number 0为成功，其他值:参考define_error中的Database错误码说明
      * DataView 哈希后的数据
      */
-    blake2s(indvdata:DataView, len:number):[number,DataView]
+    blake2s(indvdata: DataView, len: number): [number, DataView]
 
     /**
      * MD5
      * @param instr 输入计算md5的源数据
      */
-    md5(instr:string):string
+    md5(instr: string): string
 }
 
 /**
  * 加密库zcrypto
  */
-declare interface zcrypto {
+export declare interface zcrypto {
     /**
      * 
      * @param publickey 公钥
@@ -155,7 +152,7 @@ declare interface zcrypto {
 /**
  * 数据库zkvdb
  */
-declare interface zkvdb {
+export declare interface zkvdb {
     /**
      * 
      * @param strkey 为字符串类型,自动会哈希得到20字节的key
@@ -165,7 +162,7 @@ declare interface zkvdb {
      * number 0为成功，其他值:参考define_error中的Database错误码说明。
      * DataView 查询到的数据
      */
-    queryDmappDb(strkey:string, strdmappid:string, index:number):[number,DataView]
+    queryDmappDb(strkey: string, strdmappid: string, index: number): [number, DataView]
 
     /**
      * 
@@ -175,7 +172,7 @@ declare interface zkvdb {
      * @param dvdata 数据
      * @returns // 0为成功，其他值:参考define_error中的Database错误码说明。
      */
-    insertDmappDb(strkey:string, strdmappid:string, index:number, dvdata:DataView):number
+    insertDmappDb(strkey: string, strdmappid: string, index: number, dvdata: DataView): number
 
     /**
      * 修改DMAPP数据库
@@ -185,7 +182,7 @@ declare interface zkvdb {
      * @param dvdata 数据
      * @returns 0为成功，其他值:参考define_error中的Database错误码说明。
      */
-    modifyDmappDb(strkey, strdmappid, index, dvdata):number
+    modifyDmappDb(strkey, strdmappid, index, dvdata): number
 
     /**
      * 删除DMAPP数据库 
@@ -194,60 +191,60 @@ declare interface zkvdb {
      * @param index DMAPP的数据库序号
      * @returns 0为成功，其他值:参考define_error中的Database错误码说明。
      */
-    deleteDmappDb(strkey, strdmappid, index):number
+    deleteDmappDb(strkey, strdmappid, index): number
 }
 
-declare interface zbase{
+export declare interface zbase {
     /**
      * 打印日志
      * @param strLog 日志内容
      * @returns  0为成功，其他值:参考define_error中的Database错误码说明。
      */
-    log(strLog:string):number
+    log(strLog: string): number
 
     /**
      * DataView转十六进制字符串
      * @param indvdata 
      * @returns  十六进制字符串
      */
-    dataViewToHexStr(indvdata:DataView):string
+    dataViewToHexStr(indvdata: DataView): string
 
     /**
      * 十六进制字符串转DataView
      * @param instr 输入十六进制字符串
      */
-    hexStrToDataView(instr:string):DataView
+    hexStrToDataView(instr: string): DataView
 
     /**
      * 字符串转DataView 8
      * @param instr 输入原字符串
      * @returns  DataView类型的数据
      */
-    strToDataView8(instr:string):DataView
+    strToDataView8(instr: string): DataView
 
     /**
      * DataView 数据转string
      * @param indvdata 输入DataView类型的数据
      * @returns string 原字符串
      */
-    dataView8ToStr(indvdata:DataView)
+    dataView8ToStr(indvdata: DataView)
 
     /**
      * string to DataView 16
      * @param instr 输入原字符串
      * @returns DataView 类型的数据
      */
-    strToDataView16(instr:string):DataView
+    strToDataView16(instr: string): DataView
 
     /**
      * DataView 转字符串
      * @param indvdata 输入DataView类型的数据
      * @returns 原字符
      */
-    dataView16ToStr(indvdata:DataView):string
+    dataView16ToStr(indvdata: DataView): string
 }
 
-declare interface zrdb{
+export declare interface zrdb {
     /**
      * 数据库连接
      * @param strDmappid DMAPP的id号,十六进制字符
@@ -258,7 +255,7 @@ declare interface zrdb{
      * number 0为成功，其他值:参考define_error中的Database错误码说明。
      * bigint 数据会话id/连接id
      */
-    connect(strDmappid, strUser, strPasswd, strDbname):[number,bigint]
+    connect(strDmappid, strUser, strPasswd, strDbname): [number, bigint]
 
     /**
      * 数据库执行sql
@@ -268,12 +265,12 @@ declare interface zrdb{
      * number 为成功，其他值:参考define_error中的Database错误码说明
      * string 
      */
-    exec(sessionid:bigint, strSql:string):[number,string]
+    exec(sessionid: bigint, strSql: string): [number, string]
 
     /**
      * 数据库连接关闭
      * @param sessionid 数据库连接返回的会话id/连接id
      * @returns number 0为成功，其他值:参考define_error中的Database错误码说明。
      */
-    disconnect(sessionid:bigint):number
+    disconnect(sessionid: bigint): number
 }
