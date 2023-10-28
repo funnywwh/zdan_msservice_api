@@ -44,9 +44,9 @@ type OnGroupServiceMemberLeave = (groupsid: string, memberId: number) => void;
 export interface zmcserver {
     /**
      * 
-     * @param dmappId 
-     * @param serviceName 
-     * @param groupName 
+     * @param dmappId DMAPPID十六进制字符
+     * @param serviceName 服务名
+     * @param groupName 组名
      * @param OnGroupServiceClosefuc 微服务组关闭时的通知函数
      * @param OnGroupServiceReceivefuc 微服务组内接收成员发来的数据通知函数
      * @param OnGroupServiceMemberJoinfuc 微服务组内新成员加入通知函数
@@ -80,7 +80,7 @@ export interface zmcserver {
      * @param strdata 
      * @returns 返回” ok”表示发送成功，返回”net error”表示网络错误。
      */
-    sendMsgToMember(groupsid: string, memberId: string, strdata: string): 'ok' | 'net error' | void
+    sendMsgToMember(groupsid: string, memberId: number, strdata: string): 'ok' | 'net error' | void
 
     /**
      * 设置微服务组心跳超时多久通知离线
@@ -277,6 +277,3 @@ interface zrdb {
     disconnect(sessionid: bigint): number
 }
 
-declare namespace my {
-    function hello();
-}
