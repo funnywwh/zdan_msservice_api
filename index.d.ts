@@ -1,9 +1,10 @@
+
 /**
  * 微服务事件回调函数
  * 微服务管理组关闭时的异步通知；此接口为消息通知类型，底层所有数据后通知上层。
  * @param groupsid 表示服务组id号
  */
-export declare type OnGroupServiceClose = (groupsid: string) => void;
+type OnGroupServiceClose = (groupsid: string) => void;
 
 /**
  * 微服务组内接收成员发来的数据通知
@@ -12,7 +13,7 @@ export declare type OnGroupServiceClose = (groupsid: string) => void;
  * @param strMemberId 表示服务组内成员id
  * @param strdata 表示发送的数据
  */
-export declare type OnGroupServiceReceive = (groupsid: string, strMemberId: number, strdata: string) => void;
+type OnGroupServiceReceive = (groupsid: string, strMemberId: number, strdata: string) => void;
 
 /**
  * 微服务组内新成员加入通知
@@ -21,7 +22,7 @@ export declare type OnGroupServiceReceive = (groupsid: string, strMemberId: numb
  * @param memberId 表示服务组内成员id
  * @param userinfo 表示加入成员的用户信息等
  */
-export declare type OnGroupServiceMemberJoin = (groupsid: string, memberId: number, userinfo: string) => void;
+type OnGroupServiceMemberJoin = (groupsid: string, memberId: number, userinfo: string) => void;
 
 
 /**
@@ -31,16 +32,16 @@ export declare type OnGroupServiceMemberJoin = (groupsid: string, memberId: numb
  * @param memberId 表示服务组内成员id
  * @param status 为组状态变化值，1为在线，0为离线;
  */
-export declare type OnGroupMemberStatusChange = (groupsid: string, memberId: number, status: number) => void;
+type OnGroupMemberStatusChange = (groupsid: string, memberId: number, status: number) => void;
 /**
  * 微服务组内成员离开通知
  * 组内成员离开时收到的消息；此接口为消息通知类型，底层所有数据后通知上层。
  * @param groupsid 表示服务组id号
  * @param memberId 表示服务组内成员id
  */
-export declare type OnGroupServiceMemberLeave = (groupsid: string, memberId: number) => void;
+type OnGroupServiceMemberLeave = (groupsid: string, memberId: number) => void;
 
-export declare interface zmcserver {
+export interface zmcserver {
     /**
      * 
      * @param dmappId 
@@ -68,8 +69,9 @@ export declare interface zmcserver {
      * @param groupsid 表示服务组id号
      * @param memberId 表示服务组内成员id,不需要接收此条组消息，此值为0时，所有组员收到消息
      * @param strdata 表示发送数据给本服务组内
+     * @returns 返回” ok”表示发送成功，返回”net error”表示网络错误。
      */
-    sendMsgToGroup(groupsid: string, memberId: number, strdata)
+    sendMsgToGroup(groupsid: string, memberId: number, strdata:string): 'ok' | 'net error' | void
     /**
      * 发送数据给服务组内某成员
      * 给本服务组内某成员发送数据
@@ -97,7 +99,7 @@ export declare interface zmcserver {
      * @param unmsec 表示心跳超时时间，毫秒(范围1000-66060*1000毫秒)
      * @param 0为成功，非0失败；
      */
-    setMsHeartTimeoutLeave(groupsid, unmsec): number
+    setMsHeartTimeoutLeave(groupsid:string, unmsec:number): number
 
     /**
      * 
@@ -119,7 +121,7 @@ export declare interface zmcserver {
 /**
  * 加密库zcrypto
  */
-export declare interface zcrypto {
+interface zcrypto {
     /**
      * 
      * @param publickey 公钥
@@ -152,7 +154,7 @@ export declare interface zcrypto {
 /**
  * 数据库zkvdb
  */
-export declare interface zkvdb {
+interface zkvdb {
     /**
      * 
      * @param strkey 为字符串类型,自动会哈希得到20字节的key
@@ -182,7 +184,7 @@ export declare interface zkvdb {
      * @param dvdata 数据
      * @returns 0为成功，其他值:参考define_error中的Database错误码说明。
      */
-    modifyDmappDb(strkey, strdmappid, index, dvdata): number
+    modifyDmappDb(strkey:string, strdmappid:string, index:number, dvdata:DataView): number
 
     /**
      * 删除DMAPP数据库 
@@ -191,10 +193,10 @@ export declare interface zkvdb {
      * @param index DMAPP的数据库序号
      * @returns 0为成功，其他值:参考define_error中的Database错误码说明。
      */
-    deleteDmappDb(strkey, strdmappid, index): number
+    deleteDmappDb(strkey:string, strdmappid:string, index:number): number
 }
 
-export declare interface zbase {
+interface zbase {
     /**
      * 打印日志
      * @param strLog 日志内容
@@ -227,7 +229,7 @@ export declare interface zbase {
      * @param indvdata 输入DataView类型的数据
      * @returns string 原字符串
      */
-    dataView8ToStr(indvdata: DataView)
+    dataView8ToStr(indvdata: DataView):string
 
     /**
      * string to DataView 16
@@ -244,7 +246,7 @@ export declare interface zbase {
     dataView16ToStr(indvdata: DataView): string
 }
 
-export declare interface zrdb {
+interface zrdb {
     /**
      * 数据库连接
      * @param strDmappid DMAPP的id号,十六进制字符
@@ -255,7 +257,7 @@ export declare interface zrdb {
      * number 0为成功，其他值:参考define_error中的Database错误码说明。
      * bigint 数据会话id/连接id
      */
-    connect(strDmappid, strUser, strPasswd, strDbname): [number, bigint]
+    connect(strDmappid:string, strUser:string, strPasswd:string, strDbname:string): [number, bigint]
 
     /**
      * 数据库执行sql
@@ -273,4 +275,8 @@ export declare interface zrdb {
      * @returns number 0为成功，其他值:参考define_error中的Database错误码说明。
      */
     disconnect(sessionid: bigint): number
+}
+
+declare namespace my {
+    function hello();
 }
