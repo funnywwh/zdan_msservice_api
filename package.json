@@ -1,10 +1,26 @@
 {
-  "name": "@types/zdan_msservice_types",
+  "name": "zdan_msservice_api",
+  "dmappId": "",
   "version": "1.0.0",
-  "description": "zdan 微服务类型定义",
-  "main": "",
-  "types": "index.d.ts",
-  "repository": "http://gitlab.rightchaintech.com/zdan_dmapp/zdan_msservice_types.git",
+  "description": "zdan 微服务api",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/funnywwh/zdan_msservice_api"
+  },
   "author": "winger <wuwenhui@rightchaintech.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "ts-loader": "^9.5.0",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+  }
 }

@@ -4,7 +4,7 @@
  * 微服务管理组关闭时的异步通知；此接口为消息通知类型，底层所有数据后通知上层。
  * @param groupsid 表示服务组id号
  */
-type OnGroupServiceClose = (groupsid: string) => void;
+export type OnGroupServiceClose = (groupsid: string) => void;
 
 /**
  * 微服务组内接收成员发来的数据通知
@@ -13,7 +13,7 @@ type OnGroupServiceClose = (groupsid: string) => void;
  * @param strMemberId 表示服务组内成员id
  * @param strdata 表示发送的数据
  */
-type OnGroupServiceReceive = (groupsid: string, strMemberId: number, strdata: string) => void;
+export type OnGroupServiceReceive = (groupsid: string, strMemberId: number, strdata: string) => void;
 
 /**
  * 微服务组内新成员加入通知
@@ -22,7 +22,7 @@ type OnGroupServiceReceive = (groupsid: string, strMemberId: number, strdata: st
  * @param memberId 表示服务组内成员id
  * @param userinfo 表示加入成员的用户信息等
  */
-type OnGroupServiceMemberJoin = (groupsid: string, memberId: number, userinfo: string) => void;
+export type OnGroupServiceMemberJoin = (groupsid: string, memberId: number, userinfo: string) => void;
 
 
 /**
@@ -32,16 +32,16 @@ type OnGroupServiceMemberJoin = (groupsid: string, memberId: number, userinfo: s
  * @param memberId 表示服务组内成员id
  * @param status 为组状态变化值，1为在线，0为离线;
  */
-type OnGroupMemberStatusChange = (groupsid: string, memberId: number, status: number) => void;
+export type OnGroupMemberStatusChange = (groupsid: string, memberId: number, status: number) => void;
 /**
  * 微服务组内成员离开通知
  * 组内成员离开时收到的消息；此接口为消息通知类型，底层所有数据后通知上层。
  * @param groupsid 表示服务组id号
  * @param memberId 表示服务组内成员id
  */
-type OnGroupServiceMemberLeave = (groupsid: string, memberId: number) => void;
+export type OnGroupServiceMemberLeave = (groupsid: string, memberId: number) => void;
 
-export interface zmcserver {
+export interface ZMCServer {
     /**
      * 
      * @param dmappId DMAPPID十六进制字符
@@ -121,7 +121,7 @@ export interface zmcserver {
 /**
  * 加密库zcrypto
  */
-interface zcrypto {
+export interface ZCrypto {
     /**
      * 
      * @param publickey 公钥
@@ -154,7 +154,7 @@ interface zcrypto {
 /**
  * 数据库zkvdb
  */
-interface zkvdb {
+export interface ZKVDB {
     /**
      * 
      * @param strkey 为字符串类型,自动会哈希得到20字节的key
@@ -196,7 +196,7 @@ interface zkvdb {
     deleteDmappDb(strkey:string, strdmappid:string, index:number): number
 }
 
-interface zbase {
+export interface ZBase {
     /**
      * 打印日志
      * @param strLog 日志内容
@@ -246,7 +246,7 @@ interface zbase {
     dataView16ToStr(indvdata: DataView): string
 }
 
-interface zrdb {
+export interface ZRDB {
     /**
      * 数据库连接
      * @param strDmappid DMAPP的id号,十六进制字符
@@ -277,3 +277,10 @@ interface zrdb {
     disconnect(sessionid: bigint): number
 }
 
+declare global{
+    var zbase:ZBase;
+    var zmcserver:ZMCServer;
+    var zrdb:ZRDB;
+    var zkvdb:ZKVDB;
+    var zcrypto:ZCrypto;
+}
